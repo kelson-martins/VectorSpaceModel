@@ -22,7 +22,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -33,9 +32,9 @@ public class Main {
 		  
 		  BufferedReader br = new BufferedReader(new FileReader("corpus.txt"));
 		  
-		  List<String> data = new ArrayList<String>(); 
-		  String[] temp;
-
+		  List<List<String>> data = new ArrayList<List<String>>();
+		  
+		  ArrayList<String> singleData;
 		  
 		  int i,t,a,b,w = 0;
 		  
@@ -85,33 +84,36 @@ public class Main {
 			        System.out.println( everything.substring(a + separator, b) );
 			        System.out.println( everything.substring(b + separator, w) );
 			        
-
+			        sI = everything.substring(i + separator, t);
+			        sT = everything.substring(t + separator, a);
+			        sA = everything.substring(a + separator, b);
+			        sB = everything.substring(b + separator, w);
+			        
 			        everything = everything.substring(w+separator);
-			        
-			        //System.out.println(everything);
-			        
+
 			        i = everything.indexOf(".I");
 
 			        if (i != -1) {
 			        	System.out.println( everything.substring(0, i) );
-				        //sI = everything.substring(i + separator, t);
-				        //sT = everything.substring(t + separator, a);
-				        //sA = everything.substring(a + separator, b);
-				        //sB = everything.substring(b + separator, w);
-				        //sW = everything.substring(w + separator , i);
-				        
-				        //temp = new String[]{sI,sT,sA,sB,sW};
-				        //Collections.addAll(data, temp);
+			        	sW = everything.substring(0 , everything.indexOf(".I"));
+			        } else {
+			        	sW = everything.substring(0);
+			        	System.out.println( sW );
 			        }
 		        	
+			        singleData = new ArrayList<String>();
+			        singleData.add(sI);
+			        singleData.add(sT);
+			        singleData.add(sA);
+			        singleData.add(sB);
+			        singleData.add(sW);
+			        
+			        data.add(singleData);
 		        }
-		        
-
-		        
+		      
 		        
 		    } finally {
-		        br.close();
-		        
+		        br.close();		        
 		    }
 		    
 		    
